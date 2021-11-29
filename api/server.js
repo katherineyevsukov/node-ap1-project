@@ -4,6 +4,10 @@ const Users = require('./users/model')
 
 const server = express()
 
-server.user(express.json())
+server.use(express.json())
+
+server.get('/', (req, res) => {
+    res.json({ message: 'api is running'})
+})
 
 module.exports = server; // EXPORT YOUR SERVER instead of {}
