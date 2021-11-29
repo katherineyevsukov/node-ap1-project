@@ -40,4 +40,13 @@ server.post('/api/users', (req, res) => {
         })
     }
 })
+
+server.delete('/api/users/:id', (req, res) => {
+    Users.remove(req.params.id).then(deleted => {
+        !deleted ? res.status(404).json({ message: "The user with the specified ID does not exist" }) : res.status(200).json(deleted)
+    }).catch(err => {
+        res.status(500).json({ message: "The user could not be removed"})
+    })
+})
+
 module.exports = server; // EXPORT YOUR SERVER instead of {}
