@@ -27,4 +27,17 @@ server.get('/api/users/:id', async (req, res) => {
         res.status(500).json({ message: "The user information could not be retrieved" })
     }
 })
+
+server.post('/api/users', (req, res) => {
+    const { name, bio } = req.body
+    if (!name || !bio) {
+        res.status(400).json({ message: "Please provide name and bio for the user"} )
+    } else {
+        Users.insert({name, bio}).then(user => {
+            res.status(201).json(user)
+        }).catch(err => {
+            res.status(500).message({ message: "There was an error while saving the user to the database" })
+        })
+    }
+})
 module.exports = server; // EXPORT YOUR SERVER instead of {}
