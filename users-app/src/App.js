@@ -42,7 +42,7 @@ function App() {
     
   }
 
-  const addUser = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const newUser = await axios.post('http://localhost:9000/api/users/', formValues)
@@ -52,8 +52,7 @@ function App() {
       console.log(err)
     }
   }
-
-  const handleEdit = async (id) => {};
+  
 
   return (
     <div className="App">
@@ -72,7 +71,7 @@ function App() {
         </div>
       ))}
       <div>
-        <form onSubmit={addUser}>
+        <form>
           <label>
             Name:
             <input 
@@ -89,7 +88,7 @@ function App() {
             value={formValues.bio}
             />
           </label>
-          <button>{editing ? "Edit User" : "Add User"}</button>
+          <button onSubmit={handleSubmit}>"Add User"</button>
         </form>
       </div>
     </div>
